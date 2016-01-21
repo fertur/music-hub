@@ -35,11 +35,10 @@ var openAusias = angular.module('myApp', [
     'Services',
     'Directives',
     'systemControllers',
-    'documentoControllers',
+    'obraControllers',
     'usuarioControllers',
-    'tipodocumentoControllers',
+//    'tipoobraControllers',
     'tipousuarioControllers',
-    'estadoControllers',
     'ui.bootstrap',
     'ngSanitize'
 ]);
@@ -50,11 +49,11 @@ openAusias.config(['$routeProvider', function ($routeProvider) {
         //------------
         $routeProvider.when('/home', {templateUrl: 'js/system/home.html', controller: 'HomeController'});
         //------------
-        $routeProvider.when('/documento/view/:id', {templateUrl: 'js/documento/view.html', controller: 'DocumentoViewController'});
-        $routeProvider.when('/documento/new', {templateUrl: 'js/documento/newedit.html', controller: 'DocumentoNewController'});
-        $routeProvider.when('/documento/edit/:id', {templateUrl: 'js/documento/newedit.html', controller: 'DocumentoEditController'});
-        $routeProvider.when('/documento/remove/:id', {templateUrl: 'js/documento/remove.html', controller: 'DocumentoRemoveController'});
-        $routeProvider.when('/documento/plist/:page?/:rpp?', {templateUrl: 'js/documento/plist.html', controller: 'DocumentoPListController'});
+        $routeProvider.when('/obra/view/:id', {templateUrl: 'js/obra/view.html', controller: 'ObraViewController'});
+        $routeProvider.when('/obra/new', {templateUrl: 'js/obra/newedit.html', controller: 'ObraNewController'});
+        $routeProvider.when('/obra/edit/:id', {templateUrl: 'js/obra/newedit.html', controller: 'ObraEditController'});
+        $routeProvider.when('/obra/remove/:id', {templateUrl: 'js/obra/remove.html', controller: 'ObraRemoveController'});
+        $routeProvider.when('/obra/plist/:page?/:rpp?', {templateUrl: 'js/obra/plist.html', controller: 'ObraPListController'});
         //------------
         $routeProvider.when('/usuario/view/:id', {templateUrl: 'js/usuario/view.html', controller: 'UsuarioViewController'});
         $routeProvider.when('/usuario/new/:id?', {templateUrl: 'js/usuario/newedit.html', controller: 'UsuarioNewController'});
@@ -62,12 +61,10 @@ openAusias.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/usuario/remove/:id', {templateUrl: 'js/usuario/remove.html', controller: 'UsuarioRemoveController'});
         $routeProvider.when('/usuario/plist/:page?/:rpp?', {templateUrl: 'js/usuario/plist.html', controller: 'UsuarioPListController'});
         //------------
-        $routeProvider.when('/tipodocumento/view/:id', {templateUrl: 'js/tipodocumento/view.html', controller: 'TipodocumentoViewController'});
-        $routeProvider.when('/tipodocumento/selection/:page/:rpp', {templateUrl: 'js/tipodocumento/selection.html', controller: 'TipodocumentoSelectionController'});
+//        $routeProvider.when('/tipoobra/view/:id', {templateUrl: 'js/tipoobra/view.html', controller: 'TipoobraViewController'});
+//        $routeProvider.when('/tipoobra/selection/:page/:rpp', {templateUrl: 'js/tipoobra/selection.html', controller: 'TipoobraSelectionController'});
         //------------
-        $routeProvider.when('/tipousuario/selection/:page/:rpp', {templateUrl: 'js/tipousuario/selection.html', controller: 'TipousuarioSelectionController'});
-        //------------
-        $routeProvider.when('/estado/selection/:page/:rpp', {templateUrl: 'js/estado/selection.html', controller: 'EstadoSelectionController'});        
+        $routeProvider.when('/tipousuario/selection/:page/:rpp', {templateUrl: 'js/tipousuario/selection.html', controller: 'TipousuarioSelectionController'});        
         //------------
         $routeProvider.otherwise({redirectTo: '/'});
 
@@ -76,8 +73,7 @@ openAusias.config(['$routeProvider', function ($routeProvider) {
 
 var moduloSistema = angular.module('systemControllers', []);
 var moduloUsuario = angular.module('usuarioControllers', []);
-var moduloDocumento = angular.module('documentoControllers', []);
-var moduloTipodocumento = angular.module('tipodocumentoControllers', []);
+var moduloObra = angular.module('obraControllers', []);
+//var moduloTipoobra = angular.module('tipoobraControllers', []);
 var moduloTipousuario = angular.module('tipousuarioControllers', []);
-var moduloEstado = angular.module('estadoControllers', []);
 

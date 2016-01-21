@@ -1,0 +1,236 @@
+<!--
+Copyright (c) 2015 by Rafael Angel Aznar Aparici (rafaaznar at gmail dot com)
+
+openAUSIAS: The stunning micro-library that helps you to develop easily
+            AJAX web applications by using Java and jQuery
+openAUSIAS is distributed under the MIT License (MIT)
+Sources at https://github.com/rafaelaznar/
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+-->
+<div class="panel-heading" style="font-family:Oswald , serif;"  ng-include="'js/system/header.html'"></div>
+<div class="panel-body">
+    <form name="outerForm" class="form-horizontal" ng-show="result == null">
+
+        <div id="id-group" class="form-group">
+            <label class="col-sm-2 control-label" for="id">Identificador:</label>
+            <div class="control col-sm-3">
+                <input ng-model="obj.id" type="text" id="id" class="form-control" name="id" size="15" placeholder="id" disabled="disabled">
+            </div>
+        </div>
+
+
+        <div id="titulo-group" class="form-group" 
+             ng-class="{'has-error': (outerForm.titulo.$error.required || outerForm.titulo.$error.minlength) && !outerForm.titulo.$pristine}">
+            <label class="col-sm-2 control-label" for="titulo">Título:</label>
+            <div class="control col-sm-8">
+                <input ng-model="obj.titulo"
+                       type="text"
+                       id="titulo"
+                       class="form-control"
+                       name="titulo"
+                       size="15"
+                       placeholder="titulo"
+                       minlength="3"
+                       maxlength="30"
+                       required>
+                <span class="help-block" ng-show="!outerForm.titulo.$pristine && outerForm.titulo.$error.required">Este campo es obligatorio.</span>
+                <span class="help-block" ng-show="!outerForm.titulo.$pristine && outerForm.titulo.$error.minlength">Debe insertar al menos 3 caracteres.</span>
+                <span class="help-block" ng-show="!outerForm.titulo.$pristine && outerForm.titulo.$error.maxlength">No puede sobrepasar los 30 caracteres.</span>
+
+            </div>
+
+        </div>
+
+
+        <div id="contenido-group" class="form-group" 
+             ng-class="{'has-error': outerForm.contenido.$error.required && !outerForm.contenido.$pristine}">
+            <label class ="col-sm-2 control-label" for="contenido">Contenido:</label>
+            <div class="control col-sm-9">
+                <!-- <input ng-model="obj.contenido" type="text" id="contenido"
+                       class="form-control" name="contenido" size="15"
+                       placeholder="contenido">
+                -->
+                <input ng-model="obj.contenido" 
+                       type="text" 
+                       id="contenido"
+                       class="form-control" name="contenido" size="15"
+                       placeholder="contenido"
+                       minlength="10"
+                       maxlength="200"
+                       required>
+                <span class="help-block" ng-show="!outerForm.contenido.$pristine && outerForm.contenido.$error.required">Este campo es obligatorio.</span>
+                <span class="help-block" ng-show="!outerForm.contenido.$pristine && outerForm.contenido.$error.minlength">Debe insertar al menos 10 caracteres.</span>
+                <span class="help-block" ng-show="!outerForm.contenido.$pristine && outerForm.contenido.$error.maxlength">No puede sobrepasar los 200 caracteres.</span>
+                <!--
+                <div ng-messages="outerForm.contenido.$error">
+                    <div ng-message="required">You did not enter a field</div>
+                    <div ng-message="minlength">The value entered is too short</div>
+                    <div ng-message="maxlength">The value entered is too long</div>
+                </div>
+                -->
+            </div>
+
+
+
+        </div>
+
+        <div id="fecha_subida-group" class="form-group">
+            <label class="col-sm-2 control-label" for="fecha_subida">Fecha de subida:</label>
+            <div class="control col-sm-3">
+                <div class="input-group date" id="fecha_subida_group">
+                    <input type="text" class="form-control" starting-day="1" uib-datepicker-popup="dd/MM/yyyy" ng-model="obj.fecha_subida" is-open="popup2.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions1" date-disabled="disabled(date, mode)" ng-required="true" close-text="Cerrar" alt-input-formats="altInputFormats" placeholder="Fecha de subida" />
+                    <span class="input-group-addon" ng-click="open2()">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="fecha_modificacion-group" class="form-group">
+            <label class="col-sm-2 control-label" for="fecha_modificacion">Fecha de modificación:</label>
+            <div class="control col-sm-3">
+                <div class="input-group date" id="fecha_modificacion_group">
+                    <input type="text" class="form-control" starting-day="1" uib-datepicker-popup="dd/MM/yyyy" ng-model="obj.fecha_modificacion" is-open="popup1.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Cerrar" alt-input-formats="altInputFormats" placeholder="Fecha de la último modificación" />
+                    <span class="input-group-addon" ng-click="open1()">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="visitas-group" class="form-group"
+             ng-class="{'has-error': (outerForm.visitas.$error.required || outerForm.visitas.$error.pattern || outerForm.visitas.$error.lowerThan) && !outerForm.visitas.$pristine}">
+            <label class="col-sm-2 control-label" for="visitas">Visitas</label>
+            <div class="control col-sm-3">
+                <input 
+                    ng-model="obj.visitas" 
+                    type="text" 
+                    id="visitas" 
+                    class="form-control" 
+                    name="visitas" 
+                    size="15" 
+                    placeholder="visitas"
+                    ng-pattern="/^\d+$/"                    
+                    required>
+                <!--span class="help-block" ng-show="!outerForm.visitas.$pristine && outerForm.visitas.$error.required">El campo contenido es obligatorio</span>
+                <span class="help-block" ng-show="!outerForm.visitas.$pristine && outerForm.visitas.$error.pattern">El campo contenido debe ser un número entero</span>
+                <span class="help-block" ng-show="!outerForm.visitas.$pristine && outerForm.visitas.$error.lowerThan">El campo contenido debe ser menor que 40</span-->
+
+
+            </div>
+        </div>
+        
+        <div id="valoracion-group" class="form-group"
+             ng-class="{'has-error': (outerForm.valoracion.$error.required || outerForm.valoracion.$error.pattern || outerForm.valoracion.$error.lowerThan) && !outerForm.valoracion.$pristine}">
+            <label class="col-sm-2 control-label" for="valoracion">Valoracion</label>
+            <div class="control col-sm-3">
+                <input 
+                    ng-model="obj.valoracion" 
+                    type="number" 
+                    id="valoracion" 
+                    class="form-control" 
+                    name="valoracion" 
+                    size="15" 
+                    placeholder="valoracion"
+                    maxValue="10"
+                    ng-pattern="/^\d+$/"                    
+                    required>
+                <!--span class="help-block" ng-show="!outerForm.visitas.$pristine && outerForm.visitas.$error.required">El campo contenido es obligatorio</span-->
+                <span class="help-block" ng-show="!outerForm.valoracion.$pristine && outerForm.valoracion.$error.pattern">Debe insertar un número entero.</span>
+                <span class="help-block" ng-show="!outerForm.valoracion.$pristine && outerForm.valoracion.$error.maxValue">El número insertado debe ir comprendido entre el 1 y el 10.</span>
+            </div>
+        </div>
+        
+   
+        <!--
+        <saludo a="persona">
+        -->
+<!--
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="obj_usuario">Usuario:</label>
+            <div class="control col-sm-3">
+                <div class="input-group foreign" id="obj_usuario_group">
+                    <span class="input-group-addon" id="obj_usuario_button">
+                        <span class="glyphicon glyphicon-search" ng-click="chooseOne('usuario')">
+                        </span>
+                    </span>
+                    <input ng-model="obj.obj_usuario.id" readonly="true" aria-describedby="basic-addon2" class="form-control" id="obj_usuario" name="obj_usuario" type="text" size="5" maxlength="5">
+                    <span class="input-group-addon">
+                        <a href="#/usuario/view/{{obj.obj_usuario.id}}">
+                            <span>{{obj.obj_usuario.login}} ({{obj.obj_usuario.localidad}})</span>
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div> -->
+
+
+<!--        <div class="form-group">
+            <label class="col-sm-2 control-label" for="obj_tipodocumento">Tipo de documento:</label>
+            <div class="control col-sm-3">
+                <div class="input-group foreign" id="obj_tipodocumento_group">
+                    <span class="input-group-addon" id="obj_tipodocumento_button">
+                        <span class="glyphicon glyphicon-search" ng-click="chooseOne('tipodocumento')">
+                        </span>
+                    </span>
+                    <input ng-model="obj.obj_tipodocumento.id" readonly="true" aria-describedby="basic-addon2" class="form-control" id="obj_tipodocumento" name="obj_tipodocumento" type="text" size="5" maxlength="5">
+                    <span class="input-group-addon">
+                        <a href="#/tipodocumento/view/{{obj.obj_tipodocumento.id}}">
+                            <span>{{obj.obj_tipodocumento.descripcion}}</span>
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div> -->
+
+        <div id="destacado-group" class="form-group">
+            <label class="col-sm-2 control-label" for="destacado">¿Destacado?:</label>
+            <div class="control col-sm-1">
+                <input  ng-model="obj.destacado" type="checkbox" id="destacado" name="destacado" value="true" checked="checked">
+            </div>
+        </div>
+
+
+
+
+        <div class="control-group text-right">
+            <div class="controls">
+                <a class="btn btn-primary" ng-click="save()" ng-disabled="!outerForm.$valid">Guardar</a>
+                <a class="btn btn-default" ng-click="plist()">Ir al listado de obras</a>
+                <a class="btn btn-default" ng-click="close()">Cerrar</a>
+            </div>
+        </div>
+    </form>
+    <div ng-show="result != null">
+        <div class="alert alert-success" ng-show="result.status == 200">
+            <h2>Se ha modificado el registro</h2>
+            <a ng-href="#/documento/view/{{id}}">Ver el registro modificado</a>
+        </div>
+        <div class="alert alert-danger" ng-show="result.status != 200">
+            <h2>Error al modificar el documento: no se ha modificado el documento</h2>
+            <h3>Código: {{result.status}}</h3>
+            <h3>Mensaje: {{result.message}}</h3>
+        </div>
+    </div>
+</div>
+<div class="panel-footer" style="font-family: Questrial, serif;" ng-include="'js/system/footer.html'"></div>

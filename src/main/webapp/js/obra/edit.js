@@ -27,18 +27,21 @@
  */
 
 'use strict';
-moduloUsuario.controller('UsuarioEditController', ['$scope', '$routeParams', '$location', 'serverService', 'sharedSpaceService', '$filter',
+moduloObra.controller('ObraEditController', ['$scope', '$routeParams', '$location', 'serverService', 'sharedSpaceService', '$filter',
     function ($scope, $routeParams, $location, serverService, sharedSpaceService, $filter) {
         $scope.obj = null;
         $scope.id = $routeParams.id;
-        $scope.ob = 'usuario';
+        $scope.ob = 'obra';
         $scope.op = 'edit';
         $scope.result = null;
-        $scope.title = "Edición de usuario";
+        $scope.title = "Edición de obra";
         $scope.icon = "fa-file-text-o";
         if (sharedSpaceService.getFase() == 0) {
             serverService.getDataFromPromise(serverService.promise_getOne($scope.ob, $scope.id)).then(function (data) {
                 $scope.obj = data.message;
+                //date conversion
+                $scope.obj.fecha_subida = serverService.date_toDate($scope.obj.fecha_subida);
+                $scope.obj.fecha_modificacion = serverService.date_toDate($scope.obj.fecha_modificacion);
             });
         } else {
             $scope.obj = sharedSpaceService.getObject();
@@ -51,18 +54,29 @@ moduloUsuario.controller('UsuarioEditController', ['$scope', '$routeParams', '$l
             $location.path('/' + foreignObjectName + '/selection/1/10');
         }
         $scope.save = function () {
+            var dateFecha_subidaAsString = $filter('date')($scope.obj.fecha_subida, "dd/MM/yyyy");
+            var dateFecha_modificacionAsString = $filter('date')($scope.obj.fecha_modificacion, "dd/MM/yyyy");
+            $scope.obj.fecha_subida = dateFecha_subidaAsString;
+            $scope.obj.fecha_modificacion = dateFecha_modificacionAsString;
+            //console.log({json: JSON.stringify(serverService.array_identificarArray($scope.obj))});            
             serverService.getDataFromPromise(serverService.promise_setOne($scope.ob, {json: JSON.stringify(serverService.array_identificarArray($scope.obj))})).then(function (data) {
                 $scope.result = data;
             });
         };
-        $scope.$watch('obj.obj_tipousuario.id', function () {
+//        $scope.$watch('obj.obj_tipodocumento.id', function () {
+//            if ($scope.obj) {
+//                serverService.getDataFromPromise(serverService.promise_getOne('tipodocumento', $scope.obj.obj_tipodocumento.id)).then(function (data2) {
+//                    $scope.obj.obj_tipodocumento = data2.message;
+//                });
+//            }
+//        });
+        $scope.$watch('obj.obj_usuario.id', function () {
             if ($scope.obj) {
-                serverService.getDataFromPromise(serverService.promise_getOne('tipousuario', $scope.obj.obj_tipousuario.id)).then(function (data2) {
-                    $scope.obj.obj_tipousuario = data2.message;
+                serverService.getDataFromPromise(serverService.promise_getOne('usuario', $scope.obj.obj_usuario.id)).then(function (data2) {
+                    $scope.obj.obj_usuario = data2.message;
                 });
             }
         });
-        
         $scope.back = function () {
             window.history.back();
         };
@@ -70,9 +84,34 @@ moduloUsuario.controller('UsuarioEditController', ['$scope', '$routeParams', '$l
             $location.path('/home');
         };
         $scope.plist = function () {
-            $location.path('/usuario/plist');
+            $location.path('/obra/plist');
         };
 
 
+        //datepicker
+        $scope.open1 = function () {
+            $scope.popup1.opened = true;
+        };
+        $scope.popup1 = {
+            opened: false
+        };
+        $scope.disabled = function (date, mode) {
+            return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+        };
+        $scope.dateOptions = {
+            formatYear: 'yyyy',
+            startingDay: 1
+        };
+        $scope.open2 = function () {
+            $scope.popup2.opened = true;
+        };
+        $scope.popup2 = {
+            opened: false
+        };
 
+//        $scope.persona = {
+//            nombre: 'Pepe',
+//            apellido: 'Rojo',
+//            edad: 11
+//        }
     }]);

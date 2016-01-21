@@ -28,14 +28,16 @@ package net.daw.service.implementation;
 
 import com.google.gson.Gson;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import net.daw.bean.implementation.ObraBean;
 import net.daw.bean.implementation.UsuarioBean;
+import net.daw.connection.implementation.BoneConnectionPoolImpl;
 import net.daw.connection.publicinterface.ConnectionInterface;
-import net.daw.dao.implementation.UsuarioDao;
+import net.daw.dao.implementation.ObraDao;
 
 import net.daw.helper.statics.AppConfigurationHelper;
 import static net.daw.helper.statics.AppConfigurationHelper.getSourceConnection;
@@ -43,15 +45,14 @@ import net.daw.helper.statics.ExceptionBooster;
 import net.daw.helper.statics.FilterBeanHelper;
 import net.daw.helper.statics.JsonMessage;
 import net.daw.helper.statics.ParameterCook;
-
 import net.daw.service.publicinterface.TableServiceInterface;
 import net.daw.service.publicinterface.ViewServiceInterface;
 
-public class UsuarioService implements TableServiceInterface, ViewServiceInterface {
+public class ObraService implements TableServiceInterface, ViewServiceInterface {
 
     protected HttpServletRequest oRequest = null;
 
-    public UsuarioService(HttpServletRequest request) {
+    public ObraService(HttpServletRequest request) {
         oRequest = request;
     }
 
@@ -74,8 +75,8 @@ public class UsuarioService implements TableServiceInterface, ViewServiceInterfa
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                UsuarioDao oUsuarioDao = new UsuarioDao(oConnection);
-                data = JsonMessage.getJson("200", Integer.toString(oUsuarioDao.getCount(alFilter)));
+                ObraDao oObraDao = new ObraDao(oConnection);
+                data = JsonMessage.getJson("200", Integer.toString(oObraDao.getCount(alFilter)));
             } catch (Exception ex) {
                 ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getCount ERROR: " + ex.getMessage()));
             } finally {
@@ -102,11 +103,11 @@ public class UsuarioService implements TableServiceInterface, ViewServiceInterfa
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                UsuarioDao oUsuarioDao = new UsuarioDao(oConnection);
-                UsuarioBean oUsuarioBean = new UsuarioBean(id);
-                oUsuarioBean = oUsuarioDao.get(oUsuarioBean, AppConfigurationHelper.getJsonDepth());
+                ObraDao oObraDao = new ObraDao(oConnection);
+                ObraBean oObraBean = new ObraBean(id);
+                oObraBean = oObraDao.get(oObraBean, AppConfigurationHelper.getJsonDepth());
                 Gson gson = AppConfigurationHelper.getGson();
-                data = JsonMessage.getJson("200", AppConfigurationHelper.getGson().toJson(oUsuarioBean));
+                data = JsonMessage.getJson("200", AppConfigurationHelper.getGson().toJson(oObraBean));
             } catch (Exception ex) {
                 ExceptionBooster.boost(new Exception(this.getClass().getName() + ":get ERROR: " + ex.getMessage()));
             } finally {
@@ -136,8 +137,8 @@ public class UsuarioService implements TableServiceInterface, ViewServiceInterfa
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                UsuarioDao oUsuarioDao = new UsuarioDao(oConnection);
-                ArrayList<UsuarioBean> arrBeans = oUsuarioDao.getAll(alFilter, hmOrder, 1);
+                ObraDao oObraDao = new ObraDao(oConnection);
+                ArrayList<ObraBean> arrBeans = oObraDao.getAll(alFilter, hmOrder, AppConfigurationHelper.getJsonDepth());
                 data = JsonMessage.getJson("200", AppConfigurationHelper.getGson().toJson(arrBeans));
             } catch (Exception ex) {
                 ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getAll ERROR: " + ex.getMessage()));
@@ -149,7 +150,6 @@ public class UsuarioService implements TableServiceInterface, ViewServiceInterfa
                     oDataConnectionSource.disposeConnection();
                 }
             }
-
             return data;
         } else {
             return JsonMessage.getJsonMsg("401", "Unauthorized");
@@ -157,7 +157,6 @@ public class UsuarioService implements TableServiceInterface, ViewServiceInterfa
     }
 
     @Override
-    @SuppressWarnings("empty-statement")
     public String getpage() throws Exception {
         if (this.checkpermission("getpage")) {
             int intRegsPerPag = ParameterCook.prepareRpp(oRequest);;
@@ -170,8 +169,8 @@ public class UsuarioService implements TableServiceInterface, ViewServiceInterfa
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                UsuarioDao oUsuarioDao = new UsuarioDao(oConnection);
-                List<UsuarioBean> arrBeans = oUsuarioDao.getPage(intRegsPerPag, intPage, alFilter, hmOrder, AppConfigurationHelper.getJsonDepth());
+                ObraDao oObraDao = new ObraDao(oConnection);
+                List<ObraBean> arrBeans = oObraDao.getPage(intRegsPerPag, intPage, alFilter, hmOrder, AppConfigurationHelper.getJsonDepth());
                 data = JsonMessage.getJson("200", AppConfigurationHelper.getGson().toJson(arrBeans));
             } catch (Exception ex) {
                 ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getPage ERROR: " + ex.getMessage()));
@@ -200,8 +199,8 @@ public class UsuarioService implements TableServiceInterface, ViewServiceInterfa
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                UsuarioDao oUsuarioDao = new UsuarioDao(oConnection);
-                data = JsonMessage.getJson("200", Integer.toString(oUsuarioDao.getPages(intRegsPerPag, alFilter)));
+                ObraDao oObraDao = new ObraDao(oConnection);
+                data = JsonMessage.getJson("200", Integer.toString(oObraDao.getPages(intRegsPerPag, alFilter)));
             } catch (Exception ex) {
                 ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getPages ERROR: " + ex.getMessage()));
             } finally {
@@ -252,8 +251,8 @@ public class UsuarioService implements TableServiceInterface, ViewServiceInterfa
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 oConnection.setAutoCommit(false);
-                UsuarioDao oUsuarioDao = new UsuarioDao(oConnection);
-                resultado = JsonMessage.getJson("200", (String) oUsuarioDao.remove(id).toString());
+                ObraDao oObraDao = new ObraDao(oConnection);
+                resultado = JsonMessage.getJson("200", (String) oObraDao.remove(id).toString());
                 oConnection.commit();
             } catch (Exception ex) {
                 oConnection.rollback();
@@ -283,11 +282,11 @@ public class UsuarioService implements TableServiceInterface, ViewServiceInterfa
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 oConnection.setAutoCommit(false);
-                UsuarioDao oUsuarioDao = new UsuarioDao(oConnection);
-                UsuarioBean oUsuarioBean = new UsuarioBean();
-                oUsuarioBean = AppConfigurationHelper.getGson().fromJson(jason, oUsuarioBean.getClass());
-                if (oUsuarioBean != null) {
-                    Integer iResult = oUsuarioDao.set(oUsuarioBean);
+                ObraDao oObraDao = new ObraDao(oConnection);
+                ObraBean oObraBean = new ObraBean();
+                oObraBean = AppConfigurationHelper.getGson().fromJson(jason, oObraBean.getClass());
+                if (oObraBean != null) {
+                    Integer iResult = oObraDao.set(oObraBean);
                     if (iResult >= 1) {
                         resultado = JsonMessage.getJson("200", iResult.toString());
                     } else {
@@ -313,62 +312,5 @@ public class UsuarioService implements TableServiceInterface, ViewServiceInterfa
             return JsonMessage.getJsonMsg("401", "Unauthorized");
         }
     }
-
-    public String login() throws SQLException, Exception {
-        UsuarioBean oUserBean = (UsuarioBean) oRequest.getSession().getAttribute("userBean");
-        String strAnswer = null;
-        String strCode = "200";
-        if (oUserBean == null) {
-            String login = oRequest.getParameter("login");
-            String pass = oRequest.getParameter("password");
-            if (!login.equals("") && !pass.equals("")) {
-                ConnectionInterface oDataConnectionSource = null;
-                Connection oConnection = null;
-                try {
-                    oDataConnectionSource = getSourceConnection();
-                    oConnection = oDataConnectionSource.newConnection();
-                    UsuarioBean oUsuario = new UsuarioBean();
-                    oUsuario.setLogin(login);
-                    oUsuario.setPassword(pass);
-                    UsuarioDao oUsuarioDao = new UsuarioDao(oConnection);
-                    oUsuario = oUsuarioDao.getFromLogin(oUsuario);
-                    if (oUsuario.getId() != 0) {
-                        oRequest.getSession().setAttribute("userBean", oUsuario);
-                        strAnswer = oUsuario.getLogin();
-                    } else {
-                        strCode = "403";
-                        strAnswer = "User or password incorrect";
-                    }
-                } catch (Exception ex) {
-                    ExceptionBooster.boost(new Exception(this.getClass().getName() + ":login ERROR " + ex.toString()));
-                } finally {
-                    if (oConnection != null) {
-                        oConnection.close();
-                    }
-                    if (oDataConnectionSource != null) {
-                        oDataConnectionSource.disposeConnection();
-                    }
-                }
-            }
-        } else {
-            strAnswer = "Already logged in";
-        }
-        return JsonMessage.getJsonMsg(strCode, strAnswer);
-    }
-
-    public String logout() {
-        oRequest.getSession().invalidate();
-        return JsonMessage.getJsonMsg("200", "Bye");
-    }
-
-    public String getsessionstatus() {
-        String strAnswer = null;
-        UsuarioBean oUserBean = (UsuarioBean) oRequest.getSession().getAttribute("userBean");
-        if (oUserBean == null) {
-            return JsonMessage.getJsonMsg("403", "ERROR: You don't have permission to perform this operation");
-        } else {
-            return JsonMessage.getJsonMsg("200", oUserBean.getLogin());
-        }
-    }    
 
 }

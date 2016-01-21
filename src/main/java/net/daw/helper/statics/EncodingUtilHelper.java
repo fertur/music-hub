@@ -36,6 +36,8 @@ package net.daw.helper.statics;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class EncodingUtilHelper {
 
@@ -94,6 +96,13 @@ public class EncodingUtilHelper {
     public static String quotate(String s) {
         return "\"" + s + "\"";
     }
+
+    public static String stringifyAndQuotate(Date s) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String value = format.format(s);
+        return "\"" + value + "\"";
+    }
+
 
     /**
      * Private constructor to prevent this class from being instantiated.
