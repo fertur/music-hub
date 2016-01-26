@@ -2,9 +2,9 @@
  * Copyright (c) 2015 by Rafael Angel Aznar Aparici (rafaaznar at gmail dot com)
  * 
  * openAUSIAS: The stunning micro-library that helps you to develop easily 
- * AJAX web applications by using Java and jQuery
+ *             AJAX web applications by using Java and jQuery
  * openAUSIAS is distributed under the MIT License (MIT)
- * Sources at https://github.com/rafaelaznar/openAUSIAS
+ * Sources at https://github.com/rafaelaznar/
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -25,11 +25,28 @@
  * THE SOFTWARE.
  * 
  */
+'use strict';
 
-var usuarioEdit = function () {
-};
-usuarioEdit.prototype = new editModule();
-usuarioEdit.prototype.doEventsLoading = function () {
-    this.form_getForeign('usuario','estado');
-    this.form_getForeign('usuario','tipousuario');       
-};
+
+
+
+
+moduloDocumento.controller('DocumentoViewController', ['$scope', '$routeParams', 'serverService','$location',
+    function ($scope, $routeParams, serverService,$location) {
+        $scope.title = "Vista de documento";
+        $scope.icon = "fa-file-text-o";
+        $scope.ob = 'documento';
+        $scope.id = $routeParams.id;
+        serverService.getDataFromPromise(serverService.promise_getOne($scope.ob, $scope.id)).then(function (data) {
+            $scope.bean = data.message;
+        });
+        $scope.close = function () {
+            $location.path('/home');
+        };
+        $scope.plist = function () {
+            $location.path('/documento/plist');
+        };
+        $scope.back = function () {
+            window.history.back();
+        };
+    }]);
