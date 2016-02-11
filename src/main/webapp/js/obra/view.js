@@ -31,11 +31,11 @@
 
 
 
-moduloDocumento.controller('DocumentoViewController', ['$scope', '$routeParams', 'serverService','$location',
+moduloObra.controller('ObraViewController', ['$scope', '$routeParams', 'serverService','$location',
     function ($scope, $routeParams, serverService,$location) {
-        $scope.title = "Vista de documento";
+        $scope.title = "Vista de obra";
         $scope.icon = "fa-file-text-o";
-        $scope.ob = 'documento';
+        $scope.ob = 'obra';
         $scope.id = $routeParams.id;
         serverService.getDataFromPromise(serverService.promise_getOne($scope.ob, $scope.id)).then(function (data) {
             $scope.bean = data.message;
@@ -44,7 +44,7 @@ moduloDocumento.controller('DocumentoViewController', ['$scope', '$routeParams',
             $location.path('/home');
         };
         $scope.plist = function () {
-            $location.path('/documento/plist');
+            $location.path('/obra/plist');
         };
         $scope.back = function () {
             window.history.back();

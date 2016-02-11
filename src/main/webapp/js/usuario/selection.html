@@ -120,7 +120,7 @@ THE SOFTWARE.
                                 <select id="selectFilter" class="form-control" name="filter" style="width: 160px" ng-model="filter">
                                     <option style="display:none">selecciona un campo</option>                                    
                                     <option value="id">Identificador</option>
-                                    <option value="descripcion">Descripción</option>
+                                    <option value="nombre">Nombre</option>
                                 </select>
                                 <select id="selectFilteroperator" class="form-control" name="filteroperator" width="80" style="width: 200px" ng-model="filteroperator">
                                     <option style="display:none">selecciona una operacion</option>
@@ -170,18 +170,18 @@ THE SOFTWARE.
             <thead>             
                 <tr>                                                   
                     <th class="text-right">
-                        Identificador
+                        Identificador de usuario
                         <a href="#/{{ob}}/plist/{{numpage}}/{{rpp}}?order=id&ordervalue=asc"><i class="glyphicon glyphicon-arrow-up"></i></a>
                         <a href="#/{{ob}}/plist/{{numpage}}/{{rpp}}?order=id&ordervalue=desc"><i class="glyphicon glyphicon-arrow-down"></i></a>
                     </th>
-                    <th>Descripción</th>
-                    <th>Acciones</th>
+                    <th>Usuario</th>
+                    <th>Selecciona un usuario</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="obj in page">
                     <td  class="text-right">{{obj.id}}</td>
-                    <td>{{obj.descripcion}}</td>
+                    <td>{{obj.alias}} ({{obj.login}})</td>
                     <td>
                         <div class="btn-group" role="group" aria-label="seleccionar">
                             <a class="btn btn-default action02" ng-click="go(obj.id)"><i class="fa fa-check fa-2g"></i> Seleccionar</a>

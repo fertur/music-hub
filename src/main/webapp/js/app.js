@@ -36,9 +36,14 @@ var openAusias = angular.module('myApp', [
     'Directives',
     'systemControllers',
     'obraControllers',
+    'generoControllers',
     'usuarioControllers',
-//    'tipoobraControllers',
+    'instrumentoControllers',
+    'grupoinstrumentoControllers',
+    'tonalidadobraControllers',
     'tipousuarioControllers',
+    'tipoobraControllers',
+    'numpapelControllers',
     'ui.bootstrap',
     'ngSanitize'
 ]);
@@ -61,15 +66,38 @@ openAusias.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/usuario/edit/:id', {templateUrl: 'js/usuario/newedit.html', controller: 'UsuarioEditController'});
         $routeProvider.when('/usuario/remove/:id', {templateUrl: 'js/usuario/remove.html', controller: 'UsuarioRemoveController'});
         $routeProvider.when('/usuario/plist/:page?/:rpp?', {templateUrl: 'js/usuario/plist.html', controller: 'UsuarioPListController'});
-        $routeProvider.when('/usuario/selection/:page?/:rpp?', {templateUrl: 'js/tipousuario/selection.html', controller: 'UsuarioSelectionController'});
+        $routeProvider.when('/usuario/selection/:page?/:rpp?', {templateUrl: 'js/usuario/selection.html', controller: 'UsuarioSelectionController'});
         //------------
-        $routeProvider.when('/tipodocumento/view/:id', {templateUrl: 'js/tipodocumento/view.html', controller: 'TipodocumentoViewController'});
-        $routeProvider.when('/tipodocumento/selection/:page?/:rpp?', {templateUrl: 'js/tipodocumento/selection.html', controller: 'TipodocumentoSelectionController'});
+        $routeProvider.when('/instrumento/view/:id', {templateUrl: 'js/instrumento/view.html', controller: 'InstrumentoViewController'});
+        $routeProvider.when('/instrumento/new/:id?', {templateUrl: 'js/instrumento/newedit.html', controller: 'InstrumentoNewController'});
+        $routeProvider.when('/instrumento/edit/:id', {templateUrl: 'js/instrumento/newedit.html', controller: 'InstrumentoEditController'});
+        $routeProvider.when('/instrumento/remove/:id', {templateUrl: 'js/instrumento/remove.html', controller: 'InstrumentoRemoveController'});
+        $routeProvider.when('/instrumento/plist/:page?/:rpp?', {templateUrl: 'js/instrumento/plist.html', controller: 'InstrumentoPListController'});
+        $routeProvider.when('/instrumento/selection/:page?/:rpp?', {templateUrl: 'js/instrumento/selection.html', controller: 'InstrumentoSelectionController'});
+        //------------
+        $routeProvider.when('/grupoinstrumento/view/:id', {templateUrl: 'js/grupoinstrumento/view.html', controller: 'GrupoinstrumentoViewController'});       
+        $routeProvider.when('/grupoinstrumento/selection/:page?/:rpp?', {templateUrl: 'js/grupoinstrumento/selection.html', controller: 'GrupoinstrumentoSelectionController'});
+        //------------
+        $routeProvider.when('/genero/view/:id', {templateUrl: 'js/genero/view.html', controller: 'GeneroViewController'});
+        $routeProvider.when('/genero/selection/:page?/:rpp?', {templateUrl: 'js/genero/selection.html', controller: 'GeneroSelectionController'});        
+//        $routeProvider.when('/genero/new/:id?', {templateUrl: 'js/genero/newedit.html', controller: 'GeneroNewController'});
+//        $routeProvider.when('/genero/edit/:id', {templateUrl: 'js/genero/newedit.html', controller: 'GeneroEditController'});
+//        $routeProvider.when('/genero/remove/:id', {templateUrl: 'js/genero/remove.html', controller: 'GeneroRemoveController'});
+        $routeProvider.when('/genero/plist/:page?/:rpp?', {templateUrl: 'js/genero/plist.html', controller: 'GeneroPListController'});
+        //$routeProvider.when('/genero/selection/:page?/:rpp?', {templateUrl: 'js/tipousuario/selection.html', controller: 'UsuarioSelectionController'});
+        //------------
+        $routeProvider.when('/tonalidadobra/view/:id', {templateUrl: 'js/tonalidadobra/view.html', controller: 'TonalidadobraViewController'});
+        $routeProvider.when('/tonalidadobra/selection/:page?/:rpp?', {templateUrl: 'js/tonalidadobra/selection.html', controller: 'TonalidadobraSelectionController'});
         //------------
         $routeProvider.when('/tipousuario/selection/:page?/:rpp?', {templateUrl: 'js/tipousuario/selection.html', controller: 'TipousuarioSelectionController'});
         $routeProvider.when('/tipousuario/view/:id', {templateUrl: 'js/tipousuario/view.html', controller: 'TipousuarioViewController'});
         //------------
-        $routeProvider.when('/estado/selection/:page?/:rpp?', {templateUrl: 'js/estado/selection.html', controller: 'EstadoSelectionController'});        
+        $routeProvider.when('/tipoobra/selection/:page?/:rpp?', {templateUrl: 'js/tipoobra/selection.html', controller: 'TipoobraSelectionController'});
+        $routeProvider.when('/tipoobra/view/:id', {templateUrl: 'js/tipoobra/view.html', controller: 'TipoobraViewController'});
+        //------------
+        $routeProvider.when('/numpapel/view/:id', {templateUrl: 'js/numpapel/view.html', controller: 'NumpapelViewController'});       
+        $routeProvider.when('/numpapel/plist/:page?/:rpp?', {templateUrl: 'js/numpapel/plist.html', controller: 'NumpapelPListController'});
+        $routeProvider.when('/numpapel/selection/:page?/:rpp?', {templateUrl: 'js/numpapel/selection.html', controller: 'NumpapelSelectionController'});
         //------------
         $routeProvider.otherwise({redirectTo: '/'});
 
@@ -79,6 +107,12 @@ openAusias.config(['$routeProvider', function ($routeProvider) {
 var moduloSistema = angular.module('systemControllers', []);
 var moduloUsuario = angular.module('usuarioControllers', []);
 var moduloObra = angular.module('obraControllers', []);
-//var moduloTipoobra = angular.module('tipoobraControllers', []);
+var moduloGenero = angular.module('generoControllers', []);
 var moduloTipousuario = angular.module('tipousuarioControllers', []);
+var moduloTonalidadobra = angular.module('tonalidadobraControllers', []);
+var moduloInstrumento = angular.module('instrumentoControllers', []);
+var moduloGrupoinstrumento = angular.module('grupoinstrumentoControllers', []);
+var moduloNumpapel = angular.module('numpapelControllers', []);
+var moduloTipoobra = angular.module('tipoobraControllers', []);
+
 

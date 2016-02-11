@@ -37,7 +37,7 @@ THE SOFTWARE.
                     <li role="presentation"><a data-target="#pane1" aria-controls="pane1" role="tab" data-toggle="tab" aria-expanded="true">Campos visibles</a></li>
                     <li role="presentation"><a data-target="#pane2" aria-controls="pane2" role="tab" data-toggle="tab">Filtro de servidor</a></li>
                     <li role="presentation"><a data-target="#pane3" aria-controls="pane3" role="tab" data-toggle="tab">Filtro de cliente</a></li>
-                    <li role="presentation"><a data-target="#pane4" aria-controls="pane4" role="tab" data-toggle="tab">Nuevo registro</a></li>
+                    <li role="presentation"><a data-target="#pane4" aria-controls="pane4" role="tab" data-toggle="tab">Registrarse</a></li>
                 </ul>
                 <div class="tab-content">
                     <div role="tabpanel" id="pane0" class="tab-pane fade active in">
@@ -219,7 +219,7 @@ THE SOFTWARE.
             </thead>
             <tbody>
                 <tr ng-repeat="obj in page| filter:searchText">
-                    <td ng-show="visibles.id" class="text-right">{{obj.id}}</td>
+                    <td ng-show="visibles.id" class="text-center">{{obj.id}}</td>
                     <td ng-show="visibles.login">{{obj.login}}</td>
                     <td ng-show="visibles.password">{{obj.password}}</td>                                                       
                     <td ng-show="visibles.alias">{{obj.alias}}</td>                    

@@ -33,11 +33,11 @@ import java.util.HashMap;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import net.daw.bean.implementation.CategoriaobraBean;
+import net.daw.bean.implementation.GeneroobraBean;
 import net.daw.bean.implementation.UsuarioBean;
 import net.daw.connection.implementation.BoneConnectionPoolImpl;
 import net.daw.connection.publicinterface.ConnectionInterface;
-import net.daw.dao.implementation.CategoriaobraDao;
+import net.daw.dao.implementation.GeneroobraDao;
 
 import net.daw.helper.statics.AppConfigurationHelper;
 import static net.daw.helper.statics.AppConfigurationHelper.getSourceConnection;
@@ -48,11 +48,11 @@ import net.daw.helper.statics.ParameterCook;
 import net.daw.service.publicinterface.TableServiceInterface;
 import net.daw.service.publicinterface.ViewServiceInterface;
 
-public class CategoriaobraService implements TableServiceInterface, ViewServiceInterface {
+public class GeneroobraService implements TableServiceInterface, ViewServiceInterface {
 
     protected HttpServletRequest oRequest = null;
 
-    public CategoriaobraService(HttpServletRequest request) {
+    public GeneroobraService(HttpServletRequest request) {
         oRequest = request;
     }
 
@@ -75,8 +75,8 @@ public class CategoriaobraService implements TableServiceInterface, ViewServiceI
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                CategoriaobraDao oDocumentoDao = new CategoriaobraDao(oConnection);
-                data = JsonMessage.getJson("200", Integer.toString(oDocumentoDao.getCount(alFilter)));
+                GeneroobraDao oObraDao = new GeneroobraDao(oConnection);
+                data = JsonMessage.getJson("200", Integer.toString(oObraDao.getCount(alFilter)));
             } catch (Exception ex) {
                 ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getCount ERROR: " + ex.getMessage()));
             } finally {
@@ -103,11 +103,11 @@ public class CategoriaobraService implements TableServiceInterface, ViewServiceI
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                CategoriaobraDao oCategoriaobraDao = new CategoriaobraDao(oConnection);
-                CategoriaobraBean oCategoriaobraBean = new CategoriaobraBean(id);
-                oCategoriaobraBean = oCategoriaobraDao.get(oCategoriaobraBean, AppConfigurationHelper.getJsonDepth());
+                GeneroobraDao oGeneroobraDao = new GeneroobraDao(oConnection);
+                GeneroobraBean oGeneroobraBean = new GeneroobraBean(id);
+                oGeneroobraBean = oGeneroobraDao.get(oGeneroobraBean, AppConfigurationHelper.getJsonDepth());
                 Gson gson = AppConfigurationHelper.getGson();
-                data = JsonMessage.getJson("200", AppConfigurationHelper.getGson().toJson(oCategoriaobraBean));
+                data = JsonMessage.getJson("200", AppConfigurationHelper.getGson().toJson(oGeneroobraBean));
             } catch (Exception ex) {
                 ExceptionBooster.boost(new Exception(this.getClass().getName() + ":get ERROR: " + ex.getMessage()));
             } finally {
@@ -137,8 +137,8 @@ public class CategoriaobraService implements TableServiceInterface, ViewServiceI
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                CategoriaobraDao oCategoriaobraDao = new CategoriaobraDao(oConnection);
-                ArrayList<CategoriaobraBean> arrBeans = oCategoriaobraDao.getAll(alFilter, hmOrder, AppConfigurationHelper.getJsonDepth());
+                GeneroobraDao oGeneroobraDao = new GeneroobraDao(oConnection);
+                ArrayList<GeneroobraBean> arrBeans = oGeneroobraDao.getAll(alFilter, hmOrder, AppConfigurationHelper.getJsonDepth());
                 data = JsonMessage.getJson("200", AppConfigurationHelper.getGson().toJson(arrBeans));
             } catch (Exception ex) {
                 ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getAll ERROR: " + ex.getMessage()));
@@ -169,8 +169,8 @@ public class CategoriaobraService implements TableServiceInterface, ViewServiceI
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                CategoriaobraDao oCategoriaobraDao = new CategoriaobraDao(oConnection);
-                List<CategoriaobraBean> arrBeans = oCategoriaobraDao.getPage(intRegsPerPag, intPage, alFilter, hmOrder, AppConfigurationHelper.getJsonDepth());
+                GeneroobraDao oGeneroobraDao = new GeneroobraDao(oConnection);
+                List<GeneroobraBean> arrBeans = oGeneroobraDao.getPage(intRegsPerPag, intPage, alFilter, hmOrder, AppConfigurationHelper.getJsonDepth());
                 data = JsonMessage.getJson("200", AppConfigurationHelper.getGson().toJson(arrBeans));
             } catch (Exception ex) {
                 ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getPage ERROR: " + ex.getMessage()));
@@ -199,8 +199,8 @@ public class CategoriaobraService implements TableServiceInterface, ViewServiceI
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                CategoriaobraDao oCategoriaobraDao = new CategoriaobraDao(oConnection);
-                data = JsonMessage.getJson("200", Integer.toString(oCategoriaobraDao.getPages(intRegsPerPag, alFilter)));
+                GeneroobraDao oGeneroobraDao = new GeneroobraDao(oConnection);
+                data = JsonMessage.getJson("200", Integer.toString(oGeneroobraDao.getPages(intRegsPerPag, alFilter)));
             } catch (Exception ex) {
                 ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getPages ERROR: " + ex.getMessage()));
             } finally {
@@ -251,8 +251,8 @@ public class CategoriaobraService implements TableServiceInterface, ViewServiceI
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 oConnection.setAutoCommit(false);
-                CategoriaobraDao oCategoriaobraDao = new CategoriaobraDao(oConnection);
-                resultado = JsonMessage.getJson("200", (String) oCategoriaobraDao.remove(id).toString());
+                GeneroobraDao oGeneroobraDao = new GeneroobraDao(oConnection);
+                resultado = JsonMessage.getJson("200", (String) oGeneroobraDao.remove(id).toString());
                 oConnection.commit();
             } catch (Exception ex) {
                 oConnection.rollback();
@@ -282,11 +282,11 @@ public class CategoriaobraService implements TableServiceInterface, ViewServiceI
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 oConnection.setAutoCommit(false);
-                CategoriaobraDao oCategoriaobraDao = new CategoriaobraDao(oConnection);
-                CategoriaobraBean oCategoriaobraBean = new CategoriaobraBean();
-                oCategoriaobraBean = AppConfigurationHelper.getGson().fromJson(jason, oCategoriaobraBean.getClass());
-                if (oCategoriaobraBean != null) {
-                    Integer iResult = oCategoriaobraDao.set(oCategoriaobraBean);
+                GeneroobraDao oGeneroobraDao = new GeneroobraDao(oConnection);
+                GeneroobraBean oGeneroobraBean = new GeneroobraBean();
+                oGeneroobraBean = AppConfigurationHelper.getGson().fromJson(jason, oGeneroobraBean.getClass());
+                if (oGeneroobraBean != null) {
+                    Integer iResult = oGeneroobraDao.set(oGeneroobraBean);
                     if (iResult >= 1) {
                         resultado = JsonMessage.getJson("200", iResult.toString());
                     } else {

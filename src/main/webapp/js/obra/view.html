@@ -39,32 +39,48 @@ THE SOFTWARE.
                 <tbody>
                     <tr><td>id</td><td>{{bean.id}}</td></tr>       
                     <tr><td>titulo</td><td>{{bean.titulo}}</td></tr> 
-                    <tr><td>contenido</td><td>{{bean.contenido| clipString}}</td></tr> 
-                    <tr><td>alta</td><td>{{bean.alta}}</td></tr> 
-                    <tr><td>cambio</td><td>{{bean.cambio}}</td></tr> 
-                    <tr><td>hits</td><td>{{bean.hits}}</td></tr> 
-                    <tr><td>etiquetas</td><td>{{bean.etiquetas}}</td></tr> 
+                    <tr><td>descripcion</td><td>{{bean.descripcion}}</td></tr> 
+                    <tr><td>fecha_subida</td><td>{{bean.fecha_subida}}</td></tr> 
+                    <tr><td>fecha_modificacion</td><td>{{bean.fecha_modificacion}}</td></tr> 
+                    <tr><td>visitas</td><td>{{bean.visitas}}</td></tr> 
+                    <tr><td>valoracion</td><td>{{bean.valoracion}}</td></tr>                     
+                    <tr><td>destacado</td><td>{{bean.destacado}}</td></tr> 
                     <tr>
                         <td>usuario</td>
                         <td>
-                            <a href="#/usuario/view/{{bean.obj_usuario.id}}">{{bean.obj_usuario.login}}</a>
+                            <a href="#/usuario/view/{{bean.obj_usuario.id}}">{{bean.obj_usuario.alias}} ({{bean.obj_usuario.login}})</a>
                         </td>
                     </tr> 
                     <tr>
-                        <td>tipo de documento</td>
+                        <td>genero</td>
                         <td>
-                            <a href="#/tipodocumento/view/{{bean.obj_tipodocumento.id}}">{{bean.obj_tipodocumento.descripcion}}</a>
+                            <a href="#/genero/view/{{bean.obj_genero.id}}">{{bean.obj_genero.nombre}}</a>
                         </td>
                     </tr> 
-                    <tr><td>publicado</td><td>{{bean.publicado}}</td></tr> 
-                    <tr><td>portada</td><td>{{bean.portada}}</td></tr> 
-                    <tr><td>destacado</td><td>{{bean.destacado}}</td></tr> 
+                    <tr>
+                        <td>tonalidad</td>
+                        <td>
+                            <a href="#/tonalidadobra/view/{{bean.obj_tonalidadobra.id}}">{{bean.obj_tonalidadobra.nombre}}</a>
+                        </td>
+                    </tr> 
+                    <tr>
+                        <td>instrumento</td>
+                        <td>
+                            <a href="#/instrumento/view/{{bean.obj_instrumento.id}}">{{bean.obj_instrumento.nombre}}</a>
+                        </td>
+                    </tr> 
+                    <tr>
+                        <td>num. papel</td>
+                        <td>
+                            <a href="#/numpapel/view/{{bean.obj_numpapel.id}}">{{bean.obj_numpapel.nombre}}</a>
+                        </td>
+                    </tr> 
                 </tbody>
             </table>  
             <div class="text-right" > 
-                <a class="btn btn-primary" href="#/documento/edit/{{bean.id}}">Editar</a>
-                <a class="btn btn-danger" href="#/documento/remove/{{bean.id}}">Borrar</a>
-                   <a class="btn btn-default" ng-click="plist()">Ir al listado de documentos</a>
+                <a class="btn btn-primary" href="#/obra/edit/{{bean.id}}">Editar</a>
+                <a class="btn btn-danger" href="#/obra/remove/{{bean.id}}">Borrar</a>
+                   <a class="btn btn-default" ng-click="plist()">Ir al listado de obras</a>
                 <a class="btn btn-default" ng-click="close()">Cerrar</a>
             </div>
         </div>

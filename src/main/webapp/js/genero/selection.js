@@ -28,11 +28,11 @@
 
 
 
-moduloTipodocumento.controller('TipodocumentoSelectionController', ['$scope', '$routeParams', 'serverService', 'sharedSpaceService', '$location',
+moduloGenero.controller('GeneroSelectionController', ['$scope', '$routeParams', 'serverService', 'sharedSpaceService', '$location',
     function ($scope, $routeParams, serverService, sharedSpaceService, $location) {
-        $scope.ob = "tipodocumento";
+        $scope.ob = "genero";
         $scope.op = "selection";
-        $scope.title = "Selección de un tipo de documento";
+        $scope.title = "Selección de un género musical";
         $scope.neighbourhood = 2;
         $scope.numpage = $routeParams.page;
         $scope.rpp = $routeParams.rpp;
@@ -161,7 +161,7 @@ moduloTipodocumento.controller('TipodocumentoSelectionController', ['$scope', '$
 
 
         $scope.go = function (num) {
-            sharedSpaceService.getObject().obj_tipodocumento.id = num;
+            sharedSpaceService.getObject().obj_genero.id = num;
             //$scope.compartida.id_tipoproducto = num;
             //sharedSpaceService.setId(num);        
             //sharedSpaceService.setObject($scope.compartida);

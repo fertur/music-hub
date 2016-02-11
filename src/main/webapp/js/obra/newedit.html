@@ -60,27 +60,27 @@ THE SOFTWARE.
         </div>
 
 
-        <div id="contenido-group" class="form-group" 
-             ng-class="{'has-error': outerForm.contenido.$error.required && !outerForm.contenido.$pristine}">
-            <label class ="col-sm-2 control-label" for="contenido">Contenido:</label>
+        <div id="descripcion-group" class="form-group" 
+             ng-class="{'has-error': outerForm.descripcion.$error.required && !outerForm.descripcion.$pristine}">
+            <label class ="col-sm-2 control-label" for="descripcion">Descripcion:</label>
             <div class="control col-sm-9">
-                <!-- <input ng-model="obj.contenido" type="text" id="contenido"
-                       class="form-control" name="contenido" size="15"
-                       placeholder="contenido">
+                <!-- <input ng-model="obj.descripcion" type="text" id="descripcion"
+                       class="form-control" name="descripcion" size="15"
+                       placeholder="descripcion">
                 -->
-                <input ng-model="obj.contenido" 
+                <input ng-model="obj.descripcion" 
                        type="text" 
-                       id="contenido"
-                       class="form-control" name="contenido" size="15"
-                       placeholder="contenido"
+                       id="descripcion"
+                       class="form-control" name="descripcion" size="15"
+                       placeholder="descripcion"
                        minlength="10"
                        maxlength="200"
                        required>
-                <span class="help-block" ng-show="!outerForm.contenido.$pristine && outerForm.contenido.$error.required">Este campo es obligatorio.</span>
-                <span class="help-block" ng-show="!outerForm.contenido.$pristine && outerForm.contenido.$error.minlength">Debe insertar al menos 10 caracteres.</span>
-                <span class="help-block" ng-show="!outerForm.contenido.$pristine && outerForm.contenido.$error.maxlength">No puede sobrepasar los 200 caracteres.</span>
+                <span class="help-block" ng-show="!outerForm.descripcion.$pristine && outerForm.descripcion.$error.required">Este campo es obligatorio.</span>
+                <span class="help-block" ng-show="!outerForm.descripcion.$pristine && outerForm.descripcion.$error.minlength">Debe insertar al menos 10 caracteres.</span>
+                <span class="help-block" ng-show="!outerForm.descripcion.$pristine && outerForm.descripcion.$error.maxlength">No puede sobrepasar los 200 caracteres.</span>
                 <!--
-                <div ng-messages="outerForm.contenido.$error">
+                <div ng-messages="outerForm.descripcion.$error">
                     <div ng-message="required">You did not enter a field</div>
                     <div ng-message="minlength">The value entered is too short</div>
                     <div ng-message="maxlength">The value entered is too long</div>
@@ -124,7 +124,7 @@ THE SOFTWARE.
             <div class="control col-sm-3">
                 <input 
                     ng-model="obj.visitas" 
-                    type="text" 
+                    type="number" 
                     id="visitas" 
                     class="form-control" 
                     name="visitas" 
@@ -132,9 +132,9 @@ THE SOFTWARE.
                     placeholder="visitas"
                     ng-pattern="/^\d+$/"                    
                     required>
-                <!--span class="help-block" ng-show="!outerForm.visitas.$pristine && outerForm.visitas.$error.required">El campo contenido es obligatorio</span>
-                <span class="help-block" ng-show="!outerForm.visitas.$pristine && outerForm.visitas.$error.pattern">El campo contenido debe ser un número entero</span>
-                <span class="help-block" ng-show="!outerForm.visitas.$pristine && outerForm.visitas.$error.lowerThan">El campo contenido debe ser menor que 40</span-->
+                <!--span class="help-block" ng-show="!outerForm.visitas.$pristine && outerForm.visitas.$error.required">El campo descripcion es obligatorio</span>
+                <span class="help-block" ng-show="!outerForm.visitas.$pristine && outerForm.visitas.$error.pattern">El campo descripcion debe ser un número entero</span>
+                <span class="help-block" ng-show="!outerForm.visitas.$pristine && outerForm.visitas.$error.lowerThan">El campo descripcion debe ser menor que 40</span-->
 
 
             </div>
@@ -155,7 +155,7 @@ THE SOFTWARE.
                     maxValue="10"
                     ng-pattern="/^\d+$/"                    
                     required>
-                <!--span class="help-block" ng-show="!outerForm.visitas.$pristine && outerForm.visitas.$error.required">El campo contenido es obligatorio</span-->
+                <!--span class="help-block" ng-show="!outerForm.visitas.$pristine && outerForm.visitas.$error.required">El campo descripcion es obligatorio</span-->
                 <span class="help-block" ng-show="!outerForm.valoracion.$pristine && outerForm.valoracion.$error.pattern">Debe insertar un número entero.</span>
                 <span class="help-block" ng-show="!outerForm.valoracion.$pristine && outerForm.valoracion.$error.maxValue">El número insertado debe ir comprendido entre el 1 y el 10.</span>
             </div>
@@ -165,7 +165,7 @@ THE SOFTWARE.
         <!--
         <saludo a="persona">
         -->
-<!--
+
         <div class="form-group">
             <label class="col-sm-2 control-label" for="obj_usuario">Usuario:</label>
             <div class="control col-sm-3">
@@ -177,31 +177,30 @@ THE SOFTWARE.
                     <input ng-model="obj.obj_usuario.id" readonly="true" aria-describedby="basic-addon2" class="form-control" id="obj_usuario" name="obj_usuario" type="text" size="5" maxlength="5">
                     <span class="input-group-addon">
                         <a href="#/usuario/view/{{obj.obj_usuario.id}}">
-                            <span>{{obj.obj_usuario.login}} ({{obj.obj_usuario.localidad}})</span>
+                            <span>{{obj.obj_usuario.alias}} ({{obj.obj_usuario.login}})</span>
                         </a>
                     </span>
                 </div>
             </div>
-        </div> -->
-
-
-<!--        <div class="form-group">
-            <label class="col-sm-2 control-label" for="obj_tipodocumento">Tipo de documento:</label>
+        </div>
+        
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="obj_genero">Género musical:</label>
             <div class="control col-sm-3">
-                <div class="input-group foreign" id="obj_tipodocumento_group">
-                    <span class="input-group-addon" id="obj_tipodocumento_button">
-                        <span class="glyphicon glyphicon-search" ng-click="chooseOne('tipodocumento')">
+                <div class="input-group foreign" id="obj_genero_group">
+                    <span class="input-group-addon" id="obj_genero_button">
+                        <span class="glyphicon glyphicon-search" ng-click="chooseOne('genero')">
                         </span>
                     </span>
-                    <input ng-model="obj.obj_tipodocumento.id" readonly="true" aria-describedby="basic-addon2" class="form-control" id="obj_tipodocumento" name="obj_tipodocumento" type="text" size="5" maxlength="5">
+                    <input ng-model="obj.obj_genero.id" readonly="true" aria-describedby="basic-addon2" class="form-control" id="obj_genero" name="obj_genero" type="text" size="5" maxlength="5">
                     <span class="input-group-addon">
-                        <a href="#/tipodocumento/view/{{obj.obj_tipodocumento.id}}">
-                            <span>{{obj.obj_tipodocumento.descripcion}}</span>
+                        <a href="#/genero/view/{{obj.obj_genero.id}}">
+                            <span>{{obj.obj_genero.nombre}}</span>
                         </a>
                     </span>
                 </div>
             </div>
-        </div> -->
+        </div>
 
         <div id="destacado-group" class="form-group">
             <label class="col-sm-2 control-label" for="destacado">¿Destacado?:</label>
@@ -210,8 +209,77 @@ THE SOFTWARE.
             </div>
         </div>
 
-
-
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="obj_tonalidadobra">Tonalidad de la obra:</label>
+            <div class="control col-sm-3">
+                <div class="input-group foreign" id="obj_tonalidadobra">
+                    <span class="input-group-addon" id="obj_tonalidadobra">
+                        <span class="glyphicon glyphicon-search" ng-click="chooseOne('tonalidadobra')">
+                        </span>
+                    </span>
+                    <input ng-model="obj.obj_tonalidadobra.id" readonly="true" aria-describedby="basic-addon2" class="form-control" id="obj_tonalidadobra" name="obj_tonalidadobra" type="text" size="5" maxlength="5">
+                    <span class="input-group-addon">
+                        <a href="#/tonalidadobra/view/{{obj.obj_tonalidadobra.id}}">
+                            <span>{{obj.obj_tonalidadobra.nombre}}</span>
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="obj_instrumento">Instrumento de la obra:</label>
+            <div class="control col-sm-3">
+                <div class="input-group foreign" id="obj_instrumento">
+                    <span class="input-group-addon" id="obj_instrumento">
+                        <span class="glyphicon glyphicon-search" ng-click="chooseOne('instrumento')">
+                        </span>
+                    </span>
+                    <input ng-model="obj.obj_instrumento.id" readonly="true" aria-describedby="basic-addon2" class="form-control" id="obj_instrumento" name="obj_instrumento" type="text" size="5" maxlength="5">
+                    <span class="input-group-addon">
+                        <a href="#/instrumento/view/{{obj.obj_instrumento.id}}">
+                            <span>{{obj.obj_instrumento.nombre}}</span>
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="obj_numpapel">Num del papel de la obra:</label>
+            <div class="control col-sm-3">
+                <div class="input-group foreign" id="obj_numpapel">
+                    <span class="input-group-addon" id="obj_numpapel">
+                        <span class="glyphicon glyphicon-search" ng-click="chooseOne('numpapel')">
+                        </span>
+                    </span>
+                    <input ng-model="obj.obj_numpapel.id" readonly="true" aria-describedby="basic-addon2" class="form-control" id="obj_numpapel" name="obj_numpapel" type="text" size="5" maxlength="5">
+                    <span class="input-group-addon">
+                        <a href="#/numpapel/view/{{obj.obj_numpapel.id}}">
+                            <span>{{obj.obj_numpapel.nombre}}</span>
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="obj_tipoobra">Num del papel de la obra:</label>
+            <div class="control col-sm-3">
+                <div class="input-group foreign" id="obj_tipoobra">
+                    <span class="input-group-addon" id="obj_tipoobra">
+                        <span class="glyphicon glyphicon-search" ng-click="chooseOne('tipoobra')">
+                        </span>
+                    </span>
+                    <input ng-model="obj.obj_tipoobra.id" readonly="true" aria-describedby="basic-addon2" class="form-control" id="obj_tipoobra" name="obj_tipoobra" type="text" size="5" maxlength="5">
+                    <span class="input-group-addon">
+                        <a href="#/tipoobra/view/{{obj.obj_tipoobra.id}}">
+                            <span>{{obj.obj_tipoobra.descripcion}}</span>
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
 
         <div class="control-group text-right">
             <div class="controls">
@@ -224,7 +292,7 @@ THE SOFTWARE.
     <div ng-show="result != null">
         <div class="alert alert-success" ng-show="result.status == 200">
             <h2>Se ha modificado el registro</h2>
-            <a ng-href="#/documento/view/{{id}}">Ver el registro modificado</a>
+            <a ng-href="#/obra/view/{{id}}">Ver el registro modificado</a>
         </div>
         <div class="alert alert-danger" ng-show="result.status != 200">
             <h2>Error al modificar el documento: no se ha modificado el documento</h2>

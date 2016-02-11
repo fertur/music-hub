@@ -63,6 +63,54 @@ public class UsuarioService implements TableServiceInterface, ViewServiceInterfa
             return false;
         }
     }
+//    private Boolean checkpermission(String strMethodName) throws Exception {
+//        UsuarioBean oUserBean = (UsuarioBean) oRequest.getSession().getAttribute("userBean");
+//        Boolean bReturn = false;
+//        if (oUserBean != null) {
+//            if (oUserBean.getId_tipousuario() == 1) {
+//                bReturn = true;
+//            }
+//            if (oUserBean.getId_tipousuario() == 2) {
+//                switch (strMethodName) {
+//                    case "getmetainformation":
+//                    case "get":
+//                    case "getall":
+//                    case "getpage":
+//                    case "getpages":
+//                    case "getcount":
+//                        bReturn = true;
+//                        break;
+//                }
+//            }
+//            if (oUserBean.getId_tipousuario() == 3) {
+//                switch (strMethodName) {
+//                    case "getmetainformation":
+//                    case "get":
+//                    case "getall":
+//                    case "getpage":
+//                    case "getpages":
+//                    case "getcount":
+//                        bReturn = true;
+//                        break;
+//                }
+//            }
+//            if (oUserBean.getId_tipousuario() == 4) {
+//                switch (strMethodName) {
+//                    case "getmetainformation":
+//                    case "get":
+//                    case "getall":
+//                    case "getpage":
+//                    case "getpages":
+//                    case "getcount":
+//                        bReturn = true;
+//                        break;
+//                }
+//            }
+//        } else {
+//            return false;
+//        }
+//        return bReturn;
+//    }
 
     @Override
     public String getcount() throws Exception {
@@ -369,6 +417,6 @@ public class UsuarioService implements TableServiceInterface, ViewServiceInterfa
         } else {
             return JsonMessage.getJsonMsg("200", oUserBean.getLogin());
         }
-    }    
+    }
 
 }

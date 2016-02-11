@@ -33,11 +33,11 @@ import java.util.HashMap;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import net.daw.bean.implementation.CategoriaBean;
+import net.daw.bean.implementation.GeneroBean;
 import net.daw.bean.implementation.UsuarioBean;
 import net.daw.connection.implementation.BoneConnectionPoolImpl;
 import net.daw.connection.publicinterface.ConnectionInterface;
-import net.daw.dao.implementation.CategoriaDao;
+import net.daw.dao.implementation.GeneroDao;
 
 import net.daw.helper.statics.AppConfigurationHelper;
 import static net.daw.helper.statics.AppConfigurationHelper.getSourceConnection;
@@ -48,11 +48,11 @@ import net.daw.helper.statics.ParameterCook;
 import net.daw.service.publicinterface.TableServiceInterface;
 import net.daw.service.publicinterface.ViewServiceInterface;
 
-public class CategoriaService implements TableServiceInterface, ViewServiceInterface {
+public class GeneroService implements TableServiceInterface, ViewServiceInterface {
 
     protected HttpServletRequest oRequest = null;
 
-    public CategoriaService(HttpServletRequest request) {
+    public GeneroService(HttpServletRequest request) {
         oRequest = request;
     }
 
@@ -75,8 +75,8 @@ public class CategoriaService implements TableServiceInterface, ViewServiceInter
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                CategoriaDao oCategoriaDao = new CategoriaDao(oConnection);
-                data = JsonMessage.getJson("200", Integer.toString(oCategoriaDao.getCount(alFilter)));
+                GeneroDao oGeneroDao = new GeneroDao(oConnection);
+                data = JsonMessage.getJson("200", Integer.toString(oGeneroDao.getCount(alFilter)));
             } catch (Exception ex) {
                 ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getCount ERROR: " + ex.getMessage()));
             } finally {
@@ -103,11 +103,11 @@ public class CategoriaService implements TableServiceInterface, ViewServiceInter
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                CategoriaDao oCategoriaDao = new CategoriaDao(oConnection);
-                CategoriaBean oCategoriaBean = new CategoriaBean(id);
-                oCategoriaBean = oCategoriaDao.get(oCategoriaBean, AppConfigurationHelper.getJsonDepth());
+                GeneroDao oGeneroDao = new GeneroDao(oConnection);
+                GeneroBean oGeneroBean = new GeneroBean(id);
+                oGeneroBean = oGeneroDao.get(oGeneroBean, AppConfigurationHelper.getJsonDepth());
                 Gson gson = AppConfigurationHelper.getGson();
-                data = JsonMessage.getJson("200", AppConfigurationHelper.getGson().toJson(oCategoriaBean));
+                data = JsonMessage.getJson("200", AppConfigurationHelper.getGson().toJson(oGeneroBean));
             } catch (Exception ex) {
                 ExceptionBooster.boost(new Exception(this.getClass().getName() + ":get ERROR: " + ex.getMessage()));
             } finally {
@@ -137,8 +137,8 @@ public class CategoriaService implements TableServiceInterface, ViewServiceInter
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                CategoriaDao oCategoriaDao = new CategoriaDao(oConnection);
-                ArrayList<CategoriaBean> arrBeans = oCategoriaDao.getAll(alFilter, hmOrder, AppConfigurationHelper.getJsonDepth());
+                GeneroDao oGeneroDao = new GeneroDao(oConnection);
+                ArrayList<GeneroBean> arrBeans = oGeneroDao.getAll(alFilter, hmOrder, AppConfigurationHelper.getJsonDepth());
                 data = JsonMessage.getJson("200", AppConfigurationHelper.getGson().toJson(arrBeans));
             } catch (Exception ex) {
                 ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getAll ERROR: " + ex.getMessage()));
@@ -169,8 +169,8 @@ public class CategoriaService implements TableServiceInterface, ViewServiceInter
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                CategoriaDao oCategoriaDao = new CategoriaDao(oConnection);
-                List<CategoriaBean> arrBeans = oCategoriaDao.getPage(intRegsPerPag, intPage, alFilter, hmOrder, AppConfigurationHelper.getJsonDepth());
+                GeneroDao oGeneroDao = new GeneroDao(oConnection);
+                List<GeneroBean> arrBeans = oGeneroDao.getPage(intRegsPerPag, intPage, alFilter, hmOrder, AppConfigurationHelper.getJsonDepth());
                 data = JsonMessage.getJson("200", AppConfigurationHelper.getGson().toJson(arrBeans));
             } catch (Exception ex) {
                 ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getPage ERROR: " + ex.getMessage()));
@@ -199,8 +199,8 @@ public class CategoriaService implements TableServiceInterface, ViewServiceInter
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                CategoriaDao oCategoriaDao = new CategoriaDao(oConnection);
-                data = JsonMessage.getJson("200", Integer.toString(oCategoriaDao.getPages(intRegsPerPag, alFilter)));
+                GeneroDao oGeneroDao = new GeneroDao(oConnection);
+                data = JsonMessage.getJson("200", Integer.toString(oGeneroDao.getPages(intRegsPerPag, alFilter)));
             } catch (Exception ex) {
                 ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getPages ERROR: " + ex.getMessage()));
             } finally {
@@ -251,8 +251,8 @@ public class CategoriaService implements TableServiceInterface, ViewServiceInter
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 oConnection.setAutoCommit(false);
-                CategoriaDao oCategoriaDao = new CategoriaDao(oConnection);
-                resultado = JsonMessage.getJson("200", (String) oCategoriaDao.remove(id).toString());
+                GeneroDao oGeneroDao = new GeneroDao(oConnection);
+                resultado = JsonMessage.getJson("200", (String) oGeneroDao.remove(id).toString());
                 oConnection.commit();
             } catch (Exception ex) {
                 oConnection.rollback();
@@ -282,11 +282,11 @@ public class CategoriaService implements TableServiceInterface, ViewServiceInter
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 oConnection.setAutoCommit(false);
-                CategoriaDao oCategoriaDao = new CategoriaDao(oConnection);
-                CategoriaBean oCategoriaBean = new CategoriaBean();
-                oCategoriaBean = AppConfigurationHelper.getGson().fromJson(jason, oCategoriaBean.getClass());
-                if (oCategoriaBean != null) {
-                    Integer iResult = oCategoriaDao.set(oCategoriaBean);
+                GeneroDao oGeneroDao = new GeneroDao(oConnection);
+                GeneroBean oGeneroBean = new GeneroBean();
+                oGeneroBean = AppConfigurationHelper.getGson().fromJson(jason, oGeneroBean.getClass());
+                if (oGeneroBean != null) {
+                    Integer iResult = oGeneroDao.set(oGeneroBean);
                     if (iResult >= 1) {
                         resultado = JsonMessage.getJson("200", iResult.toString());
                     } else {

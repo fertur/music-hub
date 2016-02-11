@@ -1,3 +1,4 @@
+
 /* 
  * Copyright (c) 2015 by Rafael Angel Aznar Aparici (rafaaznar at gmail dot com)
  * 
@@ -37,7 +38,7 @@ moduloObra.controller('ObraPListController', ['$scope', '$routeParams', 'serverS
         $scope.visibles = {};
         $scope.visibles.id = true;
         $scope.visibles.titulo = true;
-        $scope.visibles.contenido = true;
+        $scope.visibles.descripcion = true;
         $scope.visibles.fecha_subida = true;
         $scope.visibles.fecha_modificacion = true;
         $scope.visibles.visitas = true;
@@ -45,6 +46,13 @@ moduloObra.controller('ObraPListController', ['$scope', '$routeParams', 'serverS
         $scope.visibles.id_tipousuario = true;
         $scope.visibles.valoracion = true;        
         $scope.visibles.destacado = true;
+        $scope.visibles.id_genero = true;
+        $scope.visibles.id_tonalidadobra = true;
+        $scope.visibles.id_instrumento = true;
+        $scope.visibles.id_numpapel = true;
+        $scope.visibles.id_tipoobra = true;
+        
+        
 
 
 

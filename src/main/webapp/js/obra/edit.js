@@ -63,20 +63,52 @@ moduloObra.controller('ObraEditController', ['$scope', '$routeParams', '$locatio
                 $scope.result = data;
             });
         };
-//        $scope.$watch('obj.obj_tipodocumento.id', function () {
-//            if ($scope.obj) {
-//                serverService.getDataFromPromise(serverService.promise_getOne('tipodocumento', $scope.obj.obj_tipodocumento.id)).then(function (data2) {
-//                    $scope.obj.obj_tipodocumento = data2.message;
-//                });
-//            }
-//        });
         $scope.$watch('obj.obj_usuario.id', function () {
             if ($scope.obj) {
                 serverService.getDataFromPromise(serverService.promise_getOne('usuario', $scope.obj.obj_usuario.id)).then(function (data2) {
                     $scope.obj.obj_usuario = data2.message;
                 });
             }
+        });        
+        $scope.$watch('obj.obj_tonalidadobra.id', function () {
+            if ($scope.obj) {
+                serverService.getDataFromPromise(serverService.promise_getOne('tonalidadobra', $scope.obj.obj_tonalidadobra.id)).then(function (data2) {
+                    $scope.obj.obj_tonalidadobra = data2.message;
+                });
+            }
         });
+        $scope.$watch('obj.obj_genero.id', function () {
+            if ($scope.obj) {
+                serverService.getDataFromPromise(serverService.promise_getOne('genero', $scope.obj.obj_genero.id)).then(function (data2) {
+                    $scope.obj.obj_genero = data2.message;
+                });
+            }
+        });
+        
+        $scope.$watch('obj.obj_instrumento.id', function () {
+            if ($scope.obj) {
+                serverService.getDataFromPromise(serverService.promise_getOne('instrumento', $scope.obj.obj_instrumento.id)).then(function (data2) {
+                    $scope.obj.obj_instrumento = data2.message;
+                });
+            }
+        });
+        
+        $scope.$watch('obj.obj_numpapel.id', function () {
+            if ($scope.obj) {
+                serverService.getDataFromPromise(serverService.promise_getOne('numpapel', $scope.obj.obj_numpapel.id)).then(function (data2) {
+                    $scope.obj.obj_numpapel = data2.message;
+                });
+            }
+        });
+        
+        $scope.$watch('obj.obj_tipoobra.id', function () {
+            if ($scope.obj) {
+                serverService.getDataFromPromise(serverService.promise_getOne('tipoobra', $scope.obj.obj_tipoobra.id)).then(function (data2) {
+                    $scope.obj.obj_tipoobra = data2.message;
+                });
+            }
+        });
+        
         $scope.back = function () {
             window.history.back();
         };
@@ -95,9 +127,9 @@ moduloObra.controller('ObraEditController', ['$scope', '$routeParams', '$locatio
         $scope.popup1 = {
             opened: false
         };
-        $scope.disabled = function (date, mode) {
-            return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
-        };
+//        $scope.disabled = function (date, mode) {
+//            return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+//        };
         $scope.dateOptions = {
             formatYear: 'yyyy',
             startingDay: 1
@@ -109,9 +141,4 @@ moduloObra.controller('ObraEditController', ['$scope', '$routeParams', '$locatio
             opened: false
         };
 
-//        $scope.persona = {
-//            nombre: 'Pepe',
-//            apellido: 'Rojo',
-//            edad: 11
-//        }
     }]);

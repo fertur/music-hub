@@ -28,15 +28,15 @@
 
 'use strict';
 
-moduloDocumento.controller('DocumentoRemoveController', ['$scope', '$routeParams', 'serverService',
+moduloUsuario.controller('UsuarioRemoveController', ['$scope', '$routeParams', 'serverService',
     function ($scope, $routeParams, serverService) {
         $scope.result = "";
         $scope.back = function () {
             window.history.back();
         };
-        $scope.ob = 'documento';
+        $scope.ob = 'usuario';
         $scope.id = $routeParams.id;
-        $scope.title = "Borrado de un documento";
+        $scope.title = "Borrado de un usuario";
         $scope.icon = "fa-file-text-o";
         serverService.getDataFromPromise(serverService.promise_getOne($scope.ob, $scope.id)).then(function (data) {            
             $scope.bean = data.message;

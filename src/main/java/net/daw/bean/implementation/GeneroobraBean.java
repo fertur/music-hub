@@ -31,19 +31,27 @@ import com.google.gson.annotations.Expose;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import net.daw.dao.implementation.GeneroDao;
+import net.daw.dao.implementation.ObraDao;
 
-public class CategoriaobraBean implements GenericBean {
+public class GeneroobraBean implements GenericBean {
 
     @Expose
     private Integer id;
-    private CategoriaBean id_categoria;
-    private ObraBean id_obra;
-
-    public CategoriaobraBean() {
+    @Expose(serialize = false)
+    private Integer id_genero = 0;
+    @Expose(deserialize = false)
+    private GeneroBean obj_genero = null;   
+    @Expose(serialize = false)
+    private Integer id_obra = 0;
+    @Expose(deserialize = false)
+    private ObraBean obj_obra = null;
+    
+    public GeneroobraBean() {
         this.id = 0;
     }
 
-    public CategoriaobraBean(Integer id) {
+    public GeneroobraBean(Integer id) {
         this.id = id;
     }
 
@@ -55,26 +63,42 @@ public class CategoriaobraBean implements GenericBean {
         this.id = id;
     }
 
-    public CategoriaBean getId_categoria() {
-        return id_categoria;
+    public Integer getId_genero() {
+        return id_genero;
     }
 
-    public void setId_categoria(CategoriaBean id_categoria) {
-        this.id_categoria = id_categoria;
+    public void setId_genero(Integer id_genero) {
+        this.id_genero = id_genero;
     }
 
-    public ObraBean getId_obra() {
+    public GeneroBean getObj_genero() {
+        return obj_genero;
+    }
+
+    public void setObj_genero(GeneroBean obj_genero) {
+        this.obj_genero = obj_genero;
+    }
+
+    public Integer getId_obra() {
         return id_obra;
     }
 
-    public void setId_obra(ObraBean id_obra) {
+    public void setId_obra(Integer id_obra) {
         this.id_obra = id_obra;
     }
+
+    public ObraBean getObj_obra() {
+        return obj_obra;
+    }
+
+    public void setObj_obra(ObraBean obj_obra) {
+        this.obj_obra = obj_obra;
+    }    
 
     public String toJson(Boolean expand) {
         String strJson = "{";
         strJson += "id:" + id + ","; 
-        strJson += "id_categoria:" + id_categoria + ",";
+        strJson += "id_genero:" + id_genero + ",";
         strJson += "id_obra:" + id_obra;
         strJson += "}";
         return strJson;
@@ -84,7 +108,7 @@ public class CategoriaobraBean implements GenericBean {
     public String getColumns() {
         String strColumns = "";
         strColumns += "id,";
-        strColumns += "id_categoria,";
+        strColumns += "id_genero,";
         strColumns += "id_obra";
         return strColumns;
     }
@@ -93,7 +117,7 @@ public class CategoriaobraBean implements GenericBean {
     public String getValues() {
         String strColumns = "";
         strColumns += id + ",";    
-        strColumns += id_categoria + ","; 
+        strColumns += id_genero + ","; 
         strColumns += id_obra; 
         return strColumns;
     }
@@ -102,15 +126,33 @@ public class CategoriaobraBean implements GenericBean {
     public String toPairs() {
         String strPairs = "";
         strPairs += "id=" + id + ",";  
-        strPairs += "id=" + id_categoria + ",";
+        strPairs += "id=" + id_genero + ",";
         strPairs += "id=" + id_obra;
         return strPairs;
     }
 
     @Override
-    public CategoriaobraBean fill(ResultSet oResultSet, Connection pooledConnection, Integer expand) throws SQLException, Exception {
+    public GeneroobraBean fill(ResultSet oResultSet, Connection pooledConnection, Integer expand) throws SQLException, Exception {
         this.setId(oResultSet.getInt("id")); 
-                
+        if (expand > 0) {
+            GeneroBean oGeneroBean = new GeneroBean();
+            GeneroDao oGeneroDao = new GeneroDao(pooledConnection);
+            oGeneroBean.setId(oResultSet.getInt("id_genero"));
+            oGeneroBean = oGeneroDao.get(oGeneroBean, expand - 1);
+            this.setObj_genero(oGeneroBean);
+        } else {
+            this.setId_genero(oResultSet.getInt("id_genero"));
+        }  
+        
+        if (expand > 0) {
+            ObraBean oObraBean = new ObraBean();
+            ObraDao oObraDao = new ObraDao(pooledConnection);
+            oObraBean.setId(oResultSet.getInt("id_obra"));
+            oObraBean = oObraDao.get(oObraBean, expand - 1);
+            this.setObj_obra(oObraBean);
+        } else {
+            this.setId_obra(oResultSet.getInt("id_obra"));
+        } 
         return this;
 
     }

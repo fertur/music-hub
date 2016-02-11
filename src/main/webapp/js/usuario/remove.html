@@ -39,27 +39,18 @@ THE SOFTWARE.
                     </thead>
                     <tbody>
                         <tr><td>id</td><td>{{bean.id}}</td></tr>       
-                        <tr><td>titulo</td><td>{{bean.titulo}}</td></tr> 
-                        <tr><td>contenido</td><td>{{bean.contenido| clipString}}</td></tr> 
-                        <tr><td>alta</td><td>{{bean.alta}}</td></tr> 
-                        <tr><td>cambio</td><td>{{bean.cambio}}</td></tr> 
-                        <tr><td>hits</td><td>{{bean.hits}}</td></tr> 
-                        <tr><td>etiquetas</td><td>{{bean.etiquetas}}</td></tr> 
+                        <tr><td>login</td><td>{{bean.login}}</td></tr> 
+                        <tr><td>password</td><td>{{bean.password| clipString}}</td></tr> 
+                        <tr><td>alias</td><td>{{bean.alias}}</td></tr> 
+                        <tr><td>localidad</td><td>{{bean.localidad}}</td></tr> 
+                        <tr><td>email</td><td>{{bean.email}}</td></tr>                         
                         <tr>
-                            <td>usuario</td>
+                            <td>tipousuario</td>
                             <td>
-                                <a href="#/usuario/view/{{bean.obj_usuario.id}}">{{bean.obj_usuario.login}}</a>
+                                <a href="#/tipousuario/view/{{bean.obj_tipousuario.id}}">{{bean.obj_tipousuario.descripcion}}</a>
                             </td>
                         </tr> 
-                        <tr>
-                            <td>tipo de documento</td>
-                            <td>
-                                <a href="#/tipodocumento/view/{{bean.obj_tipodocumento.id}}">{{bean.obj_tipodocumento.descripcion}}</a>
-                            </td>
-                        </tr> 
-                        <tr><td>publicado</td><td>{{bean.publicado}}</td></tr> 
-                        <tr><td>portada</td><td>{{bean.portada}}</td></tr> 
-                        <tr><td>destacado</td><td>{{bean.destacado}}</td></tr> 
+                        
                     </tbody>
                 </table>  
                 <div class="text-right" > 

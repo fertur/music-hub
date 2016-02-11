@@ -29,19 +29,24 @@
 'use strict';
 moduloObra.controller('ObraNewController', ['$scope', '$routeParams', '$location', 'serverService', 'sharedSpaceService', '$filter',
     function ($scope, $routeParams, $location, serverService, sharedSpaceService, $filter) {
-   
+
         $scope.ob = 'obra';
         $scope.op = 'new';
-                
+
         $scope.title = "Edición de obra";
         $scope.icon = "fa-file-text-o";
-        
+
         $scope.result = null;
-        
+
         $scope.obj = {};
 //        $scope.obj.obj_tipodocumento = {"id": 0};
-        $scope.obj.obj_usuario = {"id": 0};
-        
+        $scope.obj.obj_usuario = {"id": 0};        
+        $scope.obj.obj_tonalidadobra = {"id": 0};
+        $scope.obj.obj_genero = {"id": 0};
+        $scope.obj.obj_instrumento = {"id": 0};
+        $scope.obj.obj_numpapel = {"id": 0};
+        $scope.obj.obj_tipoobra = {"id": 0};
+
         if (sharedSpaceService.getFase() == 0) {
 //            if ($routeParams.tipodocumento && $routeParams.tipodocumento > 0) {
 //                $scope.obj.obj_tipodocumento.id = $routeParams.tipodocumento;
@@ -49,18 +54,24 @@ moduloObra.controller('ObraNewController', ['$scope', '$routeParams', '$location
             if ($routeParams.usuario && $routeParams.usuario > 0) {
                 $scope.obj.obj_usuario.id = $routeParams.usuario;
             }
+            if ($routeParams.genero && $routeParams.genero > 0) {
+                $scope.obj.obj_genero.id = $routeParams.genero;
+            }
+            if ($routeParams.tonalidadobra && $routeParams.tonalidadobra > 0) {
+                $scope.obj.obj_tonalidadobra.id = $routeParams.tonalidadobra;
+            }
         } else {
             $scope.obj = sharedSpaceService.getObject();
             sharedSpaceService.setFase(0);
         }
-        
+
         $scope.chooseOne = function (foreignObjectName) {
             sharedSpaceService.setObject($scope.obj);
             sharedSpaceService.setReturnLink('/' + $scope.ob + '/' + $scope.op);
             sharedSpaceService.setFase(1);
             $location.path('/' + foreignObjectName + '/selection/1/10');
         }
-        
+
         $scope.save = function () {
             var dateSubidaAsString = $filter('date')($scope.obj.fecha_subida, "dd/MM/yyyy");
             var dateModificacionAsString = $filter('date')($scope.obj.fecha_modificacion, "dd/MM/yyyy");
@@ -71,7 +82,7 @@ moduloObra.controller('ObraNewController', ['$scope', '$routeParams', '$location
                 $scope.result = data;
             });
         };
-        
+
 //        $scope.$watch('obj.obj_tipodocumento.id', function () {
 //            if ($scope.obj) {
 //                serverService.getDataFromPromise(serverService.promise_getOne('tipodocumento', $scope.obj.obj_tipodocumento.id)).then(function (data2) {
@@ -85,8 +96,43 @@ moduloObra.controller('ObraNewController', ['$scope', '$routeParams', '$location
                     $scope.obj.obj_usuario = data2.message;
                 });
             }
+        });        
+        $scope.$watch('obj.obj_tonalidadobra.id', function () {
+            if ($scope.obj) {
+                serverService.getDataFromPromise(serverService.promise_getOne('tonalidadobra', $scope.obj.obj_tonalidadobra.id)).then(function (data2) {
+                    $scope.obj.obj_genero = data2.message;
+                });
+            }
         });
-        
+        $scope.$watch('obj.obj_genero.id', function () {
+            if ($scope.obj) {
+                serverService.getDataFromPromise(serverService.promise_getOne('genero', $scope.obj.obj_genero.id)).then(function (data2) {
+                    $scope.obj.obj_genero = data2.message;
+                });
+            }
+        });
+        $scope.$watch('obj.obj_instrumento.id', function () {
+            if ($scope.obj) {
+                serverService.getDataFromPromise(serverService.promise_getOne('instrumento', $scope.obj.obj_instrumento.id)).then(function (data2) {
+                    $scope.obj.obj_instrumento = data2.message;
+                });
+            }
+        });
+        $scope.$watch('obj.obj_numpapel.id', function () {
+            if ($scope.obj) {
+                serverService.getDataFromPromise(serverService.promise_getOne('numpapel', $scope.obj.obj_numpapel.id)).then(function (data2) {
+                    $scope.obj.obj_numpapel = data2.message;
+                });
+            }
+        });
+        $scope.$watch('obj.obj_tipoobra.id', function () {
+            if ($scope.obj) {
+                serverService.getDataFromPromise(serverService.promise_getOne('tipoobra', $scope.obj.obj_tipoobra.id)).then(function (data2) {
+                    $scope.obj.obj_tipoobra = data2.message;
+                });
+            }
+        });
+
         $scope.back = function () {
             window.history.back();
         };

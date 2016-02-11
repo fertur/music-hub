@@ -30,7 +30,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
-import net.daw.bean.implementation.CategoriaobraBean;
+import net.daw.bean.implementation.GeneroobraBean;
 import net.daw.dao.publicinterface.TableDaoInterface;
 import net.daw.dao.publicinterface.ViewDaoInterface;
 import net.daw.data.implementation.MysqlDataSpImpl;
@@ -38,14 +38,14 @@ import net.daw.helper.statics.ExceptionBooster;
 import net.daw.helper.statics.FilterBeanHelper;
 import net.daw.helper.statics.SqlBuilder;
 
-public class CategoriaobraDao implements ViewDaoInterface<CategoriaobraBean>, TableDaoInterface<CategoriaobraBean> {
+public class GeneroobraDao implements ViewDaoInterface<GeneroobraBean>, TableDaoInterface<GeneroobraBean> {
 
-    private String strTable = "documento";
-    private String strSQL = "select * from documento where 1=1 ";
+    private String strTable = "generoobra";
+    private String strSQL = "select * from generoobra where 1=1 ";
     private MysqlDataSpImpl oMysql = null;
     private Connection oConnection = null;
 
-    public CategoriaobraDao(Connection oPooledConnection) throws Exception {
+    public GeneroobraDao(Connection oPooledConnection) throws Exception {
         try {
             oConnection = oPooledConnection;
             oMysql = new MysqlDataSpImpl(oConnection);
@@ -79,75 +79,75 @@ public class CategoriaobraDao implements ViewDaoInterface<CategoriaobraBean>, Ta
     }
 
     @Override
-    public ArrayList<CategoriaobraBean> getPage(int intRegsPerPag, int intPage, ArrayList<FilterBeanHelper> hmFilter, HashMap<String, String> hmOrder, Integer expand) throws Exception {
+    public ArrayList<GeneroobraBean> getPage(int intRegsPerPag, int intPage, ArrayList<FilterBeanHelper> hmFilter, HashMap<String, String> hmOrder, Integer expand) throws Exception {
         strSQL += SqlBuilder.buildSqlWhere(hmFilter);
         strSQL += SqlBuilder.buildSqlOrder(hmOrder);
         strSQL += SqlBuilder.buildSqlLimit(oMysql.getCount(strSQL), intRegsPerPag, intPage);
-        ArrayList<CategoriaobraBean> arrDocumento = new ArrayList<>();
+        ArrayList<GeneroobraBean> arrObra = new ArrayList<>();
         try {
             ResultSet oResultSet = oMysql.getAllSql(strSQL);
             if (oResultSet != null) {
                 while (oResultSet.next()) {
-                    CategoriaobraBean oCategoriaobraBean = new CategoriaobraBean();
-                    arrDocumento.add(oCategoriaobraBean.fill(oResultSet, oConnection, expand));
+                    GeneroobraBean oGeneroobraBeanBean = new GeneroobraBean();
+                    arrObra.add(oGeneroobraBeanBean.fill(oResultSet, oConnection, expand));
                 }
             }
         } catch (Exception ex) {
             ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getPage ERROR: " + ex.getMessage()));
         }
-        return arrDocumento;
+        return arrObra;
     }
 
     @Override
-    public ArrayList<CategoriaobraBean> getAll(ArrayList<FilterBeanHelper> alFilter, HashMap<String, String> hmOrder, Integer expand) throws Exception {
+    public ArrayList<GeneroobraBean> getAll(ArrayList<FilterBeanHelper> alFilter, HashMap<String, String> hmOrder, Integer expand) throws Exception {
         strSQL += SqlBuilder.buildSqlOrder(hmOrder);
-        ArrayList<CategoriaobraBean> arrDocumento = new ArrayList<>();
+        ArrayList<GeneroobraBean> arrObra = new ArrayList<>();
         try {
             ResultSet oResultSet = oMysql.getAllSql(strSQL);
             if (oResultSet != null) {
                 while (oResultSet.next()) {
-                    CategoriaobraBean oCategoriaobraBean = new CategoriaobraBean();
-                    arrDocumento.add(oCategoriaobraBean.fill(oResultSet, oConnection, expand));
+                    GeneroobraBean oGeneroobraBean = new GeneroobraBean();
+                    arrObra.add(oGeneroobraBean.fill(oResultSet, oConnection, expand));
                 }
             }
         } catch (Exception ex) {
             ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getPage ERROR: " + ex.getMessage()));
         }
-        return arrDocumento;
+        return arrObra;
     }
 
     @Override
-    public CategoriaobraBean get(CategoriaobraBean oCategoriaobraBean, Integer expand) throws Exception {
-        if (oCategoriaobraBean.getId() > 0) {
+    public GeneroobraBean get(GeneroobraBean oGeneroobraBean, Integer expand) throws Exception {
+        if (oGeneroobraBean.getId() > 0) {
             try {
-                ResultSet oResultSet = oMysql.getAllSql(strSQL + " And id= " + oCategoriaobraBean.getId() + " ");
+                ResultSet oResultSet = oMysql.getAllSql(strSQL + " And id= " + oGeneroobraBean.getId() + " ");
                 if (oResultSet != null) {
                     while (oResultSet.next()) {
-                        oCategoriaobraBean = oCategoriaobraBean.fill(oResultSet, oConnection, expand);
+                        oGeneroobraBean = oGeneroobraBean.fill(oResultSet, oConnection, expand);
                     }
                 }
             } catch (Exception ex) {
                 ExceptionBooster.boost(new Exception(this.getClass().getName() + ":get ERROR: " + ex.getMessage()));
             }
         } else {
-            oCategoriaobraBean.setId(0);
+            oGeneroobraBean.setId(0);
         }
-        return oCategoriaobraBean;
+        return oGeneroobraBean;
     }
 
     @Override
-    public Integer set(CategoriaobraBean oCategoriaobraBean) throws Exception {
+    public Integer set(GeneroobraBean oGeneroobraBean) throws Exception {
         Integer iResult = null;
         try {
-            if (oCategoriaobraBean.getId() == 0) {
+            if (oGeneroobraBean.getId() == 0) {
                 strSQL = "INSERT INTO " + strTable + " ";
-                strSQL += "(" + oCategoriaobraBean.getColumns() + ")";
-                strSQL += "VALUES(" + oCategoriaobraBean.getValues() + ")";
+                strSQL += "(" + oGeneroobraBean.getColumns() + ")";
+                strSQL += "VALUES(" + oGeneroobraBean.getValues() + ")";
                 iResult = oMysql.executeInsertSQL(strSQL);
             } else {
                 strSQL = "UPDATE " + strTable + " ";
-                strSQL += " SET " + oCategoriaobraBean.toPairs();
-                strSQL += " WHERE id=" + oCategoriaobraBean.getId();
+                strSQL += " SET " + oGeneroobraBean.toPairs();
+                strSQL += " WHERE id=" + oGeneroobraBean.getId();
                 iResult = oMysql.executeUpdateSQL(strSQL);
             }
 

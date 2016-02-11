@@ -31,7 +31,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import net.daw.bean.publicinterface.GenericBean;
-import net.daw.bean.implementation.UsuarioBean;
 import net.daw.dao.implementation.UsuarioDao;
 
 public class DocumentosautorBean implements GenericBean {

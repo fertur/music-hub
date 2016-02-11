@@ -32,7 +32,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class CategoriaBean implements GenericBean {
+public class GeneroBean implements GenericBean {
 
     @Expose
     private Integer id;
@@ -41,11 +41,11 @@ public class CategoriaBean implements GenericBean {
     @Expose
     private String descripcion;
 
-    public CategoriaBean() {
+    public GeneroBean() {
         this.id = 0;
     }
 
-    public CategoriaBean(Integer id) {
+    public GeneroBean(Integer id) {
         this.id = id;
     }
 
@@ -111,7 +111,7 @@ public class CategoriaBean implements GenericBean {
     }
 
     @Override
-    public CategoriaBean fill(ResultSet oResultSet, Connection pooledConnection, Integer expand) throws SQLException, Exception {
+    public GeneroBean fill(ResultSet oResultSet, Connection pooledConnection, Integer expand) throws SQLException, Exception {
         this.setId(oResultSet.getInt("id"));
         this.setNombre(oResultSet.getString("nombre"));
         this.setDescripcion(oResultSet.getString("descripcion"));

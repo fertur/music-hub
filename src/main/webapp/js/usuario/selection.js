@@ -29,12 +29,12 @@
 
 'use strict';
 
-moduloTipousuario.controller('TipousuarioSelectionController', ['$scope', '$routeParams', 'serverService', '$location', 'sharedSpaceService',
+moduloUsuario.controller('UsuarioSelectionController', ['$scope', '$routeParams', 'serverService', '$location', 'sharedSpaceService',
     function ($scope, $routeParams, serverService, $location, sharedSpaceService) {
 
-        $scope.ob = "tipousuario";
+        $scope.ob = "usuario";
         $scope.op = "selection";
-        $scope.title = "Selección de tipo usuario";
+        $scope.title = "Selección de usuario";
         $scope.icon = "fa-user";
         $scope.neighbourhood = 2;
 
@@ -138,7 +138,7 @@ moduloTipousuario.controller('TipousuarioSelectionController', ['$scope', '$rout
         };
 
         $scope.go = function (num) {
-            sharedSpaceService.getObject().obj_tipousuario.id = num;
+            sharedSpaceService.getObject().obj_usuario.id = num;
             sharedSpaceService.setFase(2);
             $location.path(sharedSpaceService.getReturnLink());
         };

@@ -1,3 +1,4 @@
+
 /* 
  * Copyright (c) 2015 by Rafael Angel Aznar Aparici (rafaaznar at gmail dot com)
  * 
@@ -30,28 +31,18 @@
 'use strict';
 /* Controllers */
 
-moduloObra.controller('ObraPListController', ['$scope', '$routeParams', 'serverService', '$location',
+moduloGenero.controller('GeneroPListController', ['$scope', '$routeParams', 'serverService', '$location',
     function ($scope, $routeParams, serverService, $location) {
 
 
         $scope.visibles = {};
         $scope.visibles.id = true;
-        $scope.visibles.titulo = true;
-        $scope.visibles.contenido = true;
-        $scope.visibles.fecha_subida = true;
-        $scope.visibles.fecha_modificacion = true;
-        $scope.visibles.visitas = true;
-        $scope.visibles.id_usuario = true;
-        $scope.visibles.id_tipousuario = true;
-        $scope.visibles.valoracion = true;        
-        $scope.visibles.destacado = true;
-
-
-
-
-        $scope.ob = "obra";
+        $scope.visibles.nombre = true;
+        $scope.visibles.descripcion = true;
+        
+        $scope.ob = "genero";
         $scope.op = "plist";
-        $scope.title = "Listado de obras musicales";
+        $scope.title = "Listado de géneros musicales";
         $scope.icon = "fa-file-text-o";
         $scope.neighbourhood = 2;
 
